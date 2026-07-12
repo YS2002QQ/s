@@ -298,7 +298,7 @@
     // ========== 所有日期按时间排序 ==========
     const ALL_DATES = ["2026-07-12", "2026-07-10", "2026-07-09"];
 
-    const SERVER = "http://127.0.0.1:18080";
+    const SERVER = "http://127.0.0.1:3000";
 
     function hasClass(el, cls) {
       return el.className.split(' ').indexOf(cls) >= 0;
@@ -333,7 +333,12 @@
 
     function onStockClick(varName, code) {
       // 模仿 dashboard-v2: goTdx(code) { location.href = 'http://www.treeid/code_' + code; }
-      // 通过隐藏 iframe + 本地服务器实现，不刷新当前页面
+      // 策略1: treeid URL（通达信内置浏览器直接拦截处理）
+      var treeidUrl = 'http://www.treeid/code_' + code;
+      // 策略2: 本地代理服务（127.0.0.1:3000 模拟 treeid 模式 → PostMessage 到通达信）
+      var localUrl = SERVER + '/code_' + code;
+
+      // 通过隐藏 iframe 触发，不刷新当前页面
       var iframe = document.getElementById('tdx_iframe');
       if (!iframe) {
         iframe = document.createElement('iframe');
@@ -341,8 +346,7 @@
         iframe.style.display = 'none';
         document.body.appendChild(iframe);
       }
-      // GET 请求触发服务器 send_to_tdx (PostMessage 到通达信)
-      iframe.src = SERVER + "/send_tdx?code=" + encodeURIComponent(code);
+      iframe.src = localUrl;
 
       // 同时通知本地服务器写入板块文件
       var list = window[varName];
@@ -351,6 +355,9 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ code: code, all_stocks: list })
       }).catch(function() {});
+
+      // 降级：尝试 treeid 原生 URL（适用通达信内置浏览器场景）
+      try { window.open(treeidUrl, '_blank'); } catch(e) {}
     }
   </script>
 </body>
