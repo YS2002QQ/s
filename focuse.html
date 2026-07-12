@@ -332,19 +332,16 @@
     }
 
     function onStockClick(varName, code) {
-      // 通知本地服务器：写入板块文件 + 发送到通达信
+      // 尝试通知本地服务器（写入板块文件 + 发送到通达信）
       var list = window[varName];
       fetch(SERVER + "/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ code: code, all_stocks: list })
-      })
-      .then(function(r) { return r.json(); })
-      .then(function(data) {
-        if (!data.ok) { console.error("发送失败:", data.error); }
-      })
-      .catch(function(e) {
-        console.error("连接服务失败（请确保板块导出.exe 已启动）:", e);
+      }).catch(function() {
+        // 服务器不可用（exe 未运行），直接用 tdx:// 协议发送
+        var market = code.charAt(0) === "6" ? 1 : 0;
+        window.open("tdx://" + market + "/" + code, "_blank");
       });
     }
   </script>
