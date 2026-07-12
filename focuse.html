@@ -332,17 +332,25 @@
     }
 
     function onStockClick(varName, code) {
-      // 尝试通知本地服务器（写入板块文件 + 发送到通达信）
+      // 模仿 dashboard-v2: goTdx(code) { location.href = 'http://www.treeid/code_' + code; }
+      // 通过隐藏 iframe + 本地服务器实现，不刷新当前页面
+      var iframe = document.getElementById('tdx_iframe');
+      if (!iframe) {
+        iframe = document.createElement('iframe');
+        iframe.id = 'tdx_iframe';
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+      }
+      // GET 请求触发服务器 send_to_tdx (PostMessage 到通达信)
+      iframe.src = SERVER + "/send_tdx?code=" + encodeURIComponent(code);
+
+      // 同时通知本地服务器写入板块文件
       var list = window[varName];
       fetch(SERVER + "/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ code: code, all_stocks: list })
-      }).catch(function() {
-        // 服务器不可用（exe 未运行），直接用 tdx:// 协议发送
-        var market = code.charAt(0) === "6" ? 1 : 0;
-        window.open("tdx://" + market + "/" + code, "_blank");
-      });
+      }).catch(function() {});
     }
   </script>
 </body>
