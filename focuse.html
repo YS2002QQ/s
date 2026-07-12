@@ -2,29 +2,32 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>热点股票 - 按日期归档</title>
+    <title>通达信板块 - 按日期归档</title>
   <style>
-    body { font-family: "Microsoft YaHei", sans-serif; margin: 20px; max-width: 600px; }
-    h1 { font-size: 22px; color: #333; border-bottom: 3px solid #e74c3c; padding-bottom: 8px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; }
-    .ai-hint { font-size: 12px; color: #e74c3c; font-weight: normal; }
-    .tab-bar { display: flex; flex-wrap: nowrap; gap: 6px; overflow-x: auto; margin-bottom: 12px; padding-bottom: 4px; border-bottom: 1px solid #e0e0e0; }
-    .tab-btn { background: #f5f6f8; border: 1px solid #e0e0e0; border-radius: 6px 6px 0 0; padding: 6px 14px; cursor: pointer; font-size: 14px; font-weight: 500; color: #555; white-space: nowrap; user-select: none; transition: background 0.15s, border-color 0.15s; }
+    body { font-family: "Microsoft YaHei", sans-serif; margin: 0; padding: 24px; background: #f8f9fa; }
+    .container { max-width: 640px; margin: 0 auto; background: #fff; border-radius: 10px; padding: 24px 28px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    h1 { font-size: 20px; color: #1a1a1a; border-bottom: 2px solid #e74c3c; padding-bottom: 10px; margin: 0 0 16px 0; font-weight: 600; letter-spacing: 1px; }
+    .tab-bar { display: flex; flex-wrap: nowrap; gap: 4px; overflow-x: auto; margin-bottom: 12px; padding-bottom: 6px; border-bottom: 1px solid #e8e8e8; }
+    .tab-btn { background: #f5f6f8; border: 1px solid #e0e0e0; border-radius: 6px 6px 0 0; padding: 7px 16px; cursor: pointer; font-size: 14px; font-weight: 500; color: #555; white-space: nowrap; user-select: none; transition: background 0.15s, border-color 0.15s; }
     .tab-btn:hover { background: #e8ecf0; }
-    .tab-btn.active { background: #fff; border-bottom-color: #fff; color: #e74c3c; font-weight: bold; border-top: 2px solid #e74c3c; }
-    .tab-btn .count { font-weight: normal; color: #888; font-size: 12px; margin-left: 4px; }
+    .tab-btn.active { background: #fff; border-bottom-color: #fff; color: #e74c3c; font-weight: 600; border-top: 2px solid #e74c3c; }
+    .tab-btn .count { font-weight: normal; color: #999; font-size: 12px; margin-left: 4px; }
     .tab-panel { display: none; }
     .tab-panel.active { display: block; }
-    table { border-collapse: collapse; width: 100%; }
-    th, td { border: none; border-bottom: 1px solid #f0f0f0; padding: 10px 14px; text-align: left; }
-    th { background: #fafafa; color: #555; font-weight: bold; font-size: 13px; }
+    table { border-collapse: collapse; width: 100%; font-size: 14px; }
+    th, td { border: none; border-bottom: 1px solid #f0f0f0; padding: 11px 16px; text-align: left; }
+    th { background: #fafafa; color: #666; font-weight: 600; font-size: 13px; }
     .clickable-row { cursor: pointer; transition: background 0.12s; }
     .clickable-row:hover { background: #e8f4fd; }
     .clickable-row:active { background: #cce5ff; }
-    .clickable-row td:first-child { color: #2a6496; font-weight: bold; }
+    .clickable-row td:first-child { color: #2a6496; font-weight: 600; font-family: Consolas, monospace; }
+    .stock-link { color: #2a6496; text-decoration: none; font-weight: 600; font-family: Consolas, monospace; }
+    .stock-link:hover { text-decoration: underline; color: #1a4a7a; }
   </style>
 </head>
 <body>
-  <h1>热点股票<span class="ai-hint">AI选股 风险自担</span></h1>
+  <div class="container">
+  <h1>通达信板块关注</h1>
   <script id="stock-data" type="application/json">{"2026-07-12": [{"code": "000880", "name": "潍柴重机"}, {"code": "301005", "name": "超捷股份"}, {"code": "002038", "name": "双鹭药业"}, {"code": "300102", "name": "乾照光电"}, {"code": "300861", "name": "美畅股份"}, {"code": "300069", "name": "金利华电"}, {"code": "300065", "name": "海兰信"}, {"code": "600879", "name": "XD航天电"}, {"code": "600410", "name": "华胜天成"}, {"code": "001208", "name": "华菱线缆"}, {"code": "002241", "name": "歌尔股份"}], "2026-07-10": [{"code": "300071", "name": "福石控股"}, {"code": "002456", "name": "欧菲光"}, {"code": "300164", "name": "通源石油"}, {"code": "000021", "name": "深科技"}, {"code": "000892", "name": "欢瑞世纪"}, {"code": "000063", "name": "中兴通讯"}], "2026-07-09": [{"code": "300017", "name": "网宿科技"}, {"code": "001208", "name": "华菱线缆"}, {"code": "300369", "name": "绿盟科技"}, {"code": "600488", "name": "津药药业"}, {"code": "002038", "name": "双鹭药业"}, {"code": "300164", "name": "通源石油"}, {"code": "002104", "name": "恒宝股份"}, {"code": "600749", "name": "西藏旅游"}, {"code": "603296", "name": "华勤技术"}]}</script>
 
 <div class="tab-bar">
@@ -37,17 +40,17 @@
     <table>
       <thead><tr><th>股票代码</th><th>股票名称</th></tr></thead>
       <tbody>
-          <tr onclick="onStockClick('STOCKS_2026_07_12','000880')" class="clickable-row"><td>000880</td><td>潍柴重机</td></tr>
-          <tr onclick="onStockClick('STOCKS_2026_07_12','301005')" class="clickable-row"><td>301005</td><td>超捷股份</td></tr>
-          <tr onclick="onStockClick('STOCKS_2026_07_12','002038')" class="clickable-row"><td>002038</td><td>双鹭药业</td></tr>
-          <tr onclick="onStockClick('STOCKS_2026_07_12','300102')" class="clickable-row"><td>300102</td><td>乾照光电</td></tr>
-          <tr onclick="onStockClick('STOCKS_2026_07_12','300861')" class="clickable-row"><td>300861</td><td>美畅股份</td></tr>
-          <tr onclick="onStockClick('STOCKS_2026_07_12','300069')" class="clickable-row"><td>300069</td><td>金利华电</td></tr>
-          <tr onclick="onStockClick('STOCKS_2026_07_12','300065')" class="clickable-row"><td>300065</td><td>海兰信</td></tr>
-          <tr onclick="onStockClick('STOCKS_2026_07_12','600879')" class="clickable-row"><td>600879</td><td>XD航天电</td></tr>
-          <tr onclick="onStockClick('STOCKS_2026_07_12','600410')" class="clickable-row"><td>600410</td><td>华胜天成</td></tr>
-          <tr onclick="onStockClick('STOCKS_2026_07_12','001208')" class="clickable-row"><td>001208</td><td>华菱线缆</td></tr>
-          <tr onclick="onStockClick('STOCKS_2026_07_12','002241')" class="clickable-row"><td>002241</td><td>歌尔股份</td></tr>
+          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=000880" class="stock-link">000880</a></td><td>潍柴重机</td></tr>
+          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=301005" class="stock-link">301005</a></td><td>超捷股份</td></tr>
+          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=002038" class="stock-link">002038</a></td><td>双鹭药业</td></tr>
+          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=300102" class="stock-link">300102</a></td><td>乾照光电</td></tr>
+          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=300861" class="stock-link">300861</a></td><td>美畅股份</td></tr>
+          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=300069" class="stock-link">300069</a></td><td>金利华电</td></tr>
+          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=300065" class="stock-link">300065</a></td><td>海兰信</td></tr>
+          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=600879" class="stock-link">600879</a></td><td>XD航天电</td></tr>
+          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=600410" class="stock-link">600410</a></td><td>华胜天成</td></tr>
+          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=001208" class="stock-link">001208</a></td><td>华菱线缆</td></tr>
+          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=002241" class="stock-link">002241</a></td><td>歌尔股份</td></tr>
       </tbody>
     </table>
   </div>
@@ -55,12 +58,12 @@
     <table>
       <thead><tr><th>股票代码</th><th>股票名称</th></tr></thead>
       <tbody>
-          <tr onclick="onStockClick('STOCKS_2026_07_10','300071')" class="clickable-row"><td>300071</td><td>福石控股</td></tr>
-          <tr onclick="onStockClick('STOCKS_2026_07_10','002456')" class="clickable-row"><td>002456</td><td>欧菲光</td></tr>
-          <tr onclick="onStockClick('STOCKS_2026_07_10','300164')" class="clickable-row"><td>300164</td><td>通源石油</td></tr>
-          <tr onclick="onStockClick('STOCKS_2026_07_10','000021')" class="clickable-row"><td>000021</td><td>深科技</td></tr>
-          <tr onclick="onStockClick('STOCKS_2026_07_10','000892')" class="clickable-row"><td>000892</td><td>欢瑞世纪</td></tr>
-          <tr onclick="onStockClick('STOCKS_2026_07_10','000063')" class="clickable-row"><td>000063</td><td>中兴通讯</td></tr>
+          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=300071" class="stock-link">300071</a></td><td>福石控股</td></tr>
+          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=002456" class="stock-link">002456</a></td><td>欧菲光</td></tr>
+          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=300164" class="stock-link">300164</a></td><td>通源石油</td></tr>
+          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=000021" class="stock-link">000021</a></td><td>深科技</td></tr>
+          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=000892" class="stock-link">000892</a></td><td>欢瑞世纪</td></tr>
+          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=000063" class="stock-link">000063</a></td><td>中兴通讯</td></tr>
       </tbody>
     </table>
   </div>
@@ -68,19 +71,20 @@
     <table>
       <thead><tr><th>股票代码</th><th>股票名称</th></tr></thead>
       <tbody>
-          <tr onclick="onStockClick('STOCKS_2026_07_09','300017')" class="clickable-row"><td>300017</td><td>网宿科技</td></tr>
-          <tr onclick="onStockClick('STOCKS_2026_07_09','001208')" class="clickable-row"><td>001208</td><td>华菱线缆</td></tr>
-          <tr onclick="onStockClick('STOCKS_2026_07_09','300369')" class="clickable-row"><td>300369</td><td>绿盟科技</td></tr>
-          <tr onclick="onStockClick('STOCKS_2026_07_09','600488')" class="clickable-row"><td>600488</td><td>津药药业</td></tr>
-          <tr onclick="onStockClick('STOCKS_2026_07_09','002038')" class="clickable-row"><td>002038</td><td>双鹭药业</td></tr>
-          <tr onclick="onStockClick('STOCKS_2026_07_09','300164')" class="clickable-row"><td>300164</td><td>通源石油</td></tr>
-          <tr onclick="onStockClick('STOCKS_2026_07_09','002104')" class="clickable-row"><td>002104</td><td>恒宝股份</td></tr>
-          <tr onclick="onStockClick('STOCKS_2026_07_09','600749')" class="clickable-row"><td>600749</td><td>西藏旅游</td></tr>
-          <tr onclick="onStockClick('STOCKS_2026_07_09','603296')" class="clickable-row"><td>603296</td><td>华勤技术</td></tr>
+          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=300017" class="stock-link">300017</a></td><td>网宿科技</td></tr>
+          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=001208" class="stock-link">001208</a></td><td>华菱线缆</td></tr>
+          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=300369" class="stock-link">300369</a></td><td>绿盟科技</td></tr>
+          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=600488" class="stock-link">600488</a></td><td>津药药业</td></tr>
+          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=002038" class="stock-link">002038</a></td><td>双鹭药业</td></tr>
+          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=300164" class="stock-link">300164</a></td><td>通源石油</td></tr>
+          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=002104" class="stock-link">002104</a></td><td>恒宝股份</td></tr>
+          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=600749" class="stock-link">600749</a></td><td>西藏旅游</td></tr>
+          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=603296" class="stock-link">603296</a></td><td>华勤技术</td></tr>
       </tbody>
     </table>
   </div>
 
+  </div>
   <script>
     // ========== 按日期归档的股票数据 ==========
   const STOCKS_2026_07_12 = [
@@ -124,34 +128,39 @@
     // ========== 所有日期按时间排序 ==========
     const ALL_DATES = ["2026-07-12", "2026-07-10", "2026-07-09"];
 
-    const SERVER = "http://127.0.0.1:18080";
+    const SERVER = "http://127.0.0.1:3000";
+
+    function hasClass(el, cls) {
+      return el.className.split(' ').indexOf(cls) >= 0;
+    }
+    function addClass(el, cls) {
+      if (!hasClass(el, cls)) el.className += ' ' + cls;
+    }
+    function removeClass(el, cls) {
+      var arr = el.className.split(' ');
+      var idx = arr.indexOf(cls);
+      if (idx >= 0) { arr.splice(idx, 1); el.className = arr.join(' '); }
+    }
 
     function switchTab(dateKey) {
-      document.querySelectorAll(".tab-btn").forEach(function(btn) {
-        btn.classList.toggle("active", btn.getAttribute("data-tab") === dateKey);
-      });
-      document.querySelectorAll(".tab-panel").forEach(function(panel) {
-        panel.classList.toggle("active", panel.getAttribute("data-tab-panel") === dateKey);
-      });
+      var btns = document.getElementsByClassName('tab-btn');
+      for (var i = 0; i < btns.length; i++) {
+        if (btns[i].getAttribute('data-tab') === dateKey) {
+          addClass(btns[i], 'active');
+        } else {
+          removeClass(btns[i], 'active');
+        }
+      }
+      var panels = document.getElementsByClassName('tab-panel');
+      for (var i = 0; i < panels.length; i++) {
+        if (panels[i].getAttribute('data-tab-panel') === dateKey) {
+          addClass(panels[i], 'active');
+        } else {
+          removeClass(panels[i], 'active');
+        }
+      }
     }
 
-    function onStockClick(varName, code) {
-      var list = window[varName];
-      fetch(SERVER + "/send", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ code: code, all_stocks: list })
-      })
-      .then(function(r) { return r.json(); })
-      .then(function(data) {
-        if (!data.ok) {
-          console.error("发送失败:", data.error);
-        }
-      })
-      .catch(function(e) {
-        console.error("连接服务失败:", e);
-      });
-    }
   </script>
 </body>
 </html>
