@@ -332,23 +332,8 @@
     }
 
     function onStockClick(varName, code) {
-      // 通知本地服务器：写入板块文件 + 发送代码到通达信
-      var list = window[varName];
-      fetch(SERVER + "/send", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ code: code, all_stocks: list })
-      }).catch(function() {});
-
-      // 备用：隐藏 iframe GET 方式（兼容 fetch 失败场景）
-      var iframe = document.getElementById('tdx_iframe');
-      if (!iframe) {
-        iframe = document.createElement('iframe');
-        iframe.id = 'tdx_iframe';
-        iframe.style.display = 'none';
-        document.body.appendChild(iframe);
-      }
-      iframe.src = SERVER + '/code_' + code;
+      // GET /send?code=002185 → 本地桥接服务 → SendMessage 到通达信
+      fetch(SERVER + '/send?code=' + code).catch(function() {});
     }
   </script>
 </body>
