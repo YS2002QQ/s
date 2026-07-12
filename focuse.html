@@ -5,7 +5,8 @@
   <title>热点股票 - 按日期归档</title>
   <style>
     body { font-family: "Microsoft YaHei", sans-serif; margin: 20px; max-width: 600px; }
-    h1 { font-size: 22px; color: #333; border-bottom: 3px solid #e74c3c; padding-bottom: 8px; margin-bottom: 12px; }
+    h1 { font-size: 22px; color: #333; border-bottom: 3px solid #e74c3c; padding-bottom: 8px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; }
+    .ai-hint { font-size: 12px; color: #e74c3c; font-weight: normal; }
     .tab-bar { display: flex; flex-wrap: nowrap; gap: 6px; overflow-x: auto; margin-bottom: 12px; padding-bottom: 4px; border-bottom: 1px solid #e0e0e0; }
     .tab-btn { background: #f5f6f8; border: 1px solid #e0e0e0; border-radius: 6px 6px 0 0; padding: 6px 14px; cursor: pointer; font-size: 14px; font-weight: 500; color: #555; white-space: nowrap; user-select: none; transition: background 0.15s, border-color 0.15s; }
     .tab-btn:hover { background: #e8ecf0; }
@@ -23,7 +24,7 @@
   </style>
 </head>
 <body>
-  <h1>热点股票</h1>
+  <h1>热点股票<span class="ai-hint">AI选股 风险自担</span></h1>
   <script id="stock-data" type="application/json">{"2026-07-12": [{"code": "000880", "name": "潍柴重机"}, {"code": "301005", "name": "超捷股份"}, {"code": "002038", "name": "双鹭药业"}, {"code": "300102", "name": "乾照光电"}, {"code": "300861", "name": "美畅股份"}, {"code": "300069", "name": "金利华电"}, {"code": "300065", "name": "海兰信"}, {"code": "600879", "name": "XD航天电"}, {"code": "600410", "name": "华胜天成"}, {"code": "001208", "name": "华菱线缆"}, {"code": "002241", "name": "歌尔股份"}], "2026-07-10": [{"code": "300071", "name": "福石控股"}, {"code": "002456", "name": "欧菲光"}, {"code": "300164", "name": "通源石油"}, {"code": "000021", "name": "深科技"}, {"code": "000892", "name": "欢瑞世纪"}, {"code": "000063", "name": "中兴通讯"}], "2026-07-09": [{"code": "300017", "name": "网宿科技"}, {"code": "001208", "name": "华菱线缆"}, {"code": "300369", "name": "绿盟科技"}, {"code": "600488", "name": "津药药业"}, {"code": "002038", "name": "双鹭药业"}, {"code": "300164", "name": "通源石油"}, {"code": "002104", "name": "恒宝股份"}, {"code": "600749", "name": "西藏旅游"}, {"code": "603296", "name": "华勤技术"}]}</script>
 
 <div class="tab-bar">
