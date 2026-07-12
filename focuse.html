@@ -332,6 +332,7 @@
     }
 
     function onStockClick(varName, code) {
+      // 通知本地服务器：写入板块文件 + 发送到通达信
       var list = window[varName];
       fetch(SERVER + "/send", {
         method: "POST",
@@ -340,12 +341,10 @@
       })
       .then(function(r) { return r.json(); })
       .then(function(data) {
-        if (!data.ok) {
-          console.error("发送失败:", data.error);
-        }
+        if (!data.ok) { console.error("发送失败:", data.error); }
       })
       .catch(function(e) {
-        console.error("连接服务失败:", e);
+        console.error("连接服务失败（请确保板块导出.exe 已启动）:", e);
       });
     }
   </script>
