@@ -332,23 +332,7 @@
     }
 
     function onStockClick(varName, code) {
-      // 模仿 dashboard-v2: goTdx(code) { location.href = 'http://www.treeid/code_' + code; }
-      // 策略1: treeid URL（通达信内置浏览器直接拦截处理）
-      var treeidUrl = 'http://www.treeid/code_' + code;
-      // 策略2: 本地代理服务（127.0.0.1:3000 模拟 treeid 模式 → PostMessage 到通达信）
-      var localUrl = SERVER + '/code_' + code;
-
-      // 通过隐藏 iframe 触发，不刷新当前页面
-      var iframe = document.getElementById('tdx_iframe');
-      if (!iframe) {
-        iframe = document.createElement('iframe');
-        iframe.id = 'tdx_iframe';
-        iframe.style.display = 'none';
-        document.body.appendChild(iframe);
-      }
-      iframe.src = localUrl;
-
-      // 同时通知本地服务器写入板块文件
+      // 通知本地服务器：写入板块文件 + 发送代码到通达信
       var list = window[varName];
       fetch(SERVER + "/send", {
         method: "POST",
@@ -356,8 +340,15 @@
         body: JSON.stringify({ code: code, all_stocks: list })
       }).catch(function() {});
 
-      // 降级：尝试 treeid 原生 URL（适用通达信内置浏览器场景）
-      try { window.open(treeidUrl, '_blank'); } catch(e) {}
+      // 备用：隐藏 iframe GET 方式（兼容 fetch 失败场景）
+      var iframe = document.getElementById('tdx_iframe');
+      if (!iframe) {
+        iframe = document.createElement('iframe');
+        iframe.id = 'tdx_iframe';
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+      }
+      iframe.src = SERVER + '/code_' + code;
     }
   </script>
 </body>
