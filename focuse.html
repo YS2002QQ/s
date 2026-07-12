@@ -21,7 +21,7 @@
     .clickable-row:hover { background: #e8f4fd; }
     .clickable-row:active { background: #cce5ff; }
     .clickable-row td:first-child { color: #2a6496; font-weight: 600; font-family: Consolas, monospace; }
-    .stock-link { color: #2a6496; text-decoration: none; font-weight: 600; font-family: Consolas, monospace; }
+    .stock-link { color: #2a6496; cursor: pointer; text-decoration: none; font-weight: 600; font-family: Consolas, monospace; }
     .stock-link:hover { text-decoration: underline; color: #1a4a7a; }
   </style>
 </head>
@@ -38,29 +38,29 @@
     <table>
       <thead><tr><th>股票代码</th><th>股票名称</th></tr></thead>
       <tbody>
-          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=600749" class="stock-link">600749</a></td><td>西藏旅游</td></tr>
-          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=000506" class="stock-link">000506</a></td><td>招金黄金</td></tr>
-          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=300408" class="stock-link">300408</a></td><td>三环集团</td></tr>
-          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=002050" class="stock-link">002050</a></td><td>三花智控</td></tr>
-          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=300276" class="stock-link">300276</a></td><td>三丰智能</td></tr>
-          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=002536" class="stock-link">002536</a></td><td>飞龙股份</td></tr>
-          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=002185" class="stock-link">002185</a></td><td>华天科技</td></tr>
-          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=600584" class="stock-link">600584</a></td><td>长电科技</td></tr>
-          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=600488" class="stock-link">600488</a></td><td>津药药业</td></tr>
-          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=000021" class="stock-link">000021</a></td><td>深科技</td></tr>
-          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=002364" class="stock-link">002364</a></td><td>中恒电气</td></tr>
-          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=603538" class="stock-link">603538</a></td><td>美诺华</td></tr>
-          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=002245" class="stock-link">002245</a></td><td>蔚蓝锂芯</td></tr>
-          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=301669" class="stock-link">301669</a></td><td>高特电子</td></tr>
-          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=603928" class="stock-link">603928</a></td><td>兴业股份</td></tr>
-          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=603861" class="stock-link">603861</a></td><td>白云电器</td></tr>
-          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=603118" class="stock-link">603118</a></td><td>共进股份</td></tr>
-          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=600988" class="stock-link">600988</a></td><td>赤峰黄金</td></tr>
-          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=600288" class="stock-link">600288</a></td><td>大恒科技</td></tr>
-          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=002767" class="stock-link">002767</a></td><td>先锋电子</td></tr>
-          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=001365" class="stock-link">001365</a></td><td>天海电子</td></tr>
-          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=001317" class="stock-link">001317</a></td><td>三羊马</td></tr>
-          <tr class="clickable-row"><td><a href="http://127.0.0.1:3000/send?code=000545" class="stock-link">000545</a></td><td>金浦钛业</td></tr>
+          <tr class="clickable-row"><td><span class="stock-link" onclick="location.href='http://www.treeid/code_600749'">600749</span></td><td>西藏旅游</td></tr>
+          <tr class="clickable-row"><td><span class="stock-link" onclick="location.href='http://www.treeid/code_000506'">000506</span></td><td>招金黄金</td></tr>
+          <tr class="clickable-row"><td><span class="stock-link" onclick="location.href='http://www.treeid/code_300408'">300408</span></td><td>三环集团</td></tr>
+          <tr class="clickable-row"><td><span class="stock-link" onclick="location.href='http://www.treeid/code_002050'">002050</span></td><td>三花智控</td></tr>
+          <tr class="clickable-row"><td><span class="stock-link" onclick="location.href='http://www.treeid/code_300276'">300276</span></td><td>三丰智能</td></tr>
+          <tr class="clickable-row"><td><span class="stock-link" onclick="location.href='http://www.treeid/code_002536'">002536</span></td><td>飞龙股份</td></tr>
+          <tr class="clickable-row"><td><span class="stock-link" onclick="location.href='http://www.treeid/code_002185'">002185</span></td><td>华天科技</td></tr>
+          <tr class="clickable-row"><td><span class="stock-link" onclick="location.href='http://www.treeid/code_600584'">600584</span></td><td>长电科技</td></tr>
+          <tr class="clickable-row"><td><span class="stock-link" onclick="location.href='http://www.treeid/code_600488'">600488</span></td><td>津药药业</td></tr>
+          <tr class="clickable-row"><td><span class="stock-link" onclick="location.href='http://www.treeid/code_000021'">000021</span></td><td>深科技</td></tr>
+          <tr class="clickable-row"><td><span class="stock-link" onclick="location.href='http://www.treeid/code_002364'">002364</span></td><td>中恒电气</td></tr>
+          <tr class="clickable-row"><td><span class="stock-link" onclick="location.href='http://www.treeid/code_603538'">603538</span></td><td>美诺华</td></tr>
+          <tr class="clickable-row"><td><span class="stock-link" onclick="location.href='http://www.treeid/code_002245'">002245</span></td><td>蔚蓝锂芯</td></tr>
+          <tr class="clickable-row"><td><span class="stock-link" onclick="location.href='http://www.treeid/code_301669'">301669</span></td><td>高特电子</td></tr>
+          <tr class="clickable-row"><td><span class="stock-link" onclick="location.href='http://www.treeid/code_603928'">603928</span></td><td>兴业股份</td></tr>
+          <tr class="clickable-row"><td><span class="stock-link" onclick="location.href='http://www.treeid/code_603861'">603861</span></td><td>白云电器</td></tr>
+          <tr class="clickable-row"><td><span class="stock-link" onclick="location.href='http://www.treeid/code_603118'">603118</span></td><td>共进股份</td></tr>
+          <tr class="clickable-row"><td><span class="stock-link" onclick="location.href='http://www.treeid/code_600988'">600988</span></td><td>赤峰黄金</td></tr>
+          <tr class="clickable-row"><td><span class="stock-link" onclick="location.href='http://www.treeid/code_600288'">600288</span></td><td>大恒科技</td></tr>
+          <tr class="clickable-row"><td><span class="stock-link" onclick="location.href='http://www.treeid/code_002767'">002767</span></td><td>先锋电子</td></tr>
+          <tr class="clickable-row"><td><span class="stock-link" onclick="location.href='http://www.treeid/code_001365'">001365</span></td><td>天海电子</td></tr>
+          <tr class="clickable-row"><td><span class="stock-link" onclick="location.href='http://www.treeid/code_001317'">001317</span></td><td>三羊马</td></tr>
+          <tr class="clickable-row"><td><span class="stock-link" onclick="location.href='http://www.treeid/code_000545'">000545</span></td><td>金浦钛业</td></tr>
       </tbody>
     </table>
   </div>
