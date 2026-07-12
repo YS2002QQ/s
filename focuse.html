@@ -332,7 +332,15 @@
     }
 
     function onStockClick(varName, code) {
-      // GET /send?code=002185 → 本地桥接服务 → SendMessage 到通达信
+      // 方式A: tdx://协议跳转（系统已注册 tdx:// → TdxW.exe）
+      var a = document.createElement('a');
+      a.href = 'tdx://' + code;
+      a.style.display = 'none';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      // 方式B: 本地桥接 SendMessage（兼容协议未注册场景）
       fetch(SERVER + '/send?code=' + code).catch(function() {});
     }
   </script>
