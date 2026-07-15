@@ -185,6 +185,27 @@
         color: var(--text-primary);
         border-color: var(--accent);
     }
+    .btn-back {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        background: rgba(255, 184, 0, 0.12);
+        border: 1px solid rgba(255, 184, 0, 0.45);
+        color: var(--accent);
+        padding: 5px 14px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.2s;
+        white-space: nowrap;
+    }
+    .btn-back:hover {
+        background: var(--accent);
+        color: #0a0e17;
+        border-color: var(--accent);
+    }
     .btn-refresh:disabled {
         opacity: 0.5;
         cursor: not-allowed;
@@ -1441,6 +1462,7 @@
             <span class="src-badge src-loading" id="srcBadge">连接中</span>
             <span class="dash-date">更新 <span class="mono" id="lastUpdate">--:--:--</span></span>
             <button class="btn-refresh" id="btnRefresh" onclick="manualRefresh()">🔄 刷新</button>
+            <a class="btn-back" href="focuse.html" title="返回选股页">← 返回</a>
         </div>
     </header>
 
