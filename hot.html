@@ -1286,10 +1286,22 @@
         background: var(--bg-cell);
         cursor: default;
     }
-    .etf-panel .stock-code {
+    .etf-panel .stock-code,
+    .etf-panel .stock-name-link {
         color: var(--accent-blue);
         font-family: var(--font-mono);
         font-size: 12px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+    .etf-panel .stock-name-link {
+        font-family: var(--font-sans);
+        color: var(--text-primary);
+    }
+    .etf-panel .stock-code:hover,
+    .etf-panel .stock-name-link:hover {
+        color: var(--accent);
+        text-decoration: underline;
     }
     .etf-panel .text-center {
         text-align: center;
@@ -2905,10 +2917,28 @@ function renderBlockTable(stocks) {
     }).join('');
 }
 
+/** 点击股票代码/名称 → 送给通达信（treeid 协议 + 本地桥接） */
 function openTdx(code) {
-    if (code) {
-        window.open(`https://quote.eastmoney.com/concept/${code}.html`, '_blank');
+    if (!code) return;
+    var c = String(code).replace(/\D/g, '');
+    if (c.length > 6) c = c.slice(-6);
+    while (c.length < 6) c = '0' + c;
+    if (!/^\d{6}$/.test(c)) return;
+
+    // 本地服务桥接（外置浏览器 + 板块导出.py 本地服务运行时）
+    try {
+        fetch('http://127.0.0.1:3000/send?code=' + c, { mode: 'no-cors', redirect: 'manual' }).catch(function () {});
+    } catch (e) {}
+
+    // 通达信内置协议（不跳走当前页）
+    var iframe = document.getElementById('tdxBridge');
+    if (!iframe) {
+        iframe = document.createElement('iframe');
+        iframe.id = 'tdxBridge';
+        iframe.style.cssText = 'display:none;width:0;height:0;border:0;';
+        document.body.appendChild(iframe);
     }
+    iframe.src = 'http://www.treeid/code_' + c;
 }
 
 function toggleBlockSelector() {
@@ -3811,8 +3841,8 @@ function renderTableETF(type) {
             html += `
                 <tr class="stock-row">
                     <td>${idx + 1}</td>
-                    <td><span class="stock-code">${item.code}</span></td>
-                    <td>${item.name}</td>
+                    <td><span class="stock-code" onclick="openTdx('${item.code}')" title="发送到通达信">${item.code}</span></td>
+                    <td><span class="stock-name-link" onclick="openTdx('${item.code}')" title="发送到通达信">${item.name}</span></td>
                     <td style="text-align:right;">${priceStr}</td>
                     <td style="text-align:right; color:${isUpChange ? '#ff5252' : '#4caf50'}; font-weight:bold;">
                         ${changeStr}
