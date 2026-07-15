@@ -38,14 +38,14 @@
 <div class="tab-wrap">
   <button class="tab-prev" id="tabPrev" type="button" aria-label="向左">‹</button>
   <div class="tab-bar" id="tabBar">
-    <button class="tab-btn active" onclick="switchTab('2026-07-15')" data-tab="2026-07-15">今日<span class="count">(3支)</span></button>
-    <button class="tab-btn" onclick="switchTab('2026-07-14')" data-tab="2026-07-14">7/14<span class="count">(5支)</span></button>
-    <button class="tab-btn" onclick="switchTab('2026-07-13')" data-tab="2026-07-13">7/13<span class="count">(4支)</span></button>
-    <button class="tab-btn" onclick="switchTab('2026-07-10')" data-tab="2026-07-10">7/10<span class="count">(11支)</span></button>
-    <button class="tab-btn" onclick="switchTab('2026-07-09')" data-tab="2026-07-09">7/9<span class="count">(6支)</span></button>
-    <button class="tab-btn" onclick="switchTab('2026-07-08')" data-tab="2026-07-08">7/8<span class="count">(9支)</span></button>
-    <button class="tab-btn" onclick="switchTab('2026-07-07')" data-tab="2026-07-07">7/7<span class="count">(11支)</span></button>
-    <button class="tab-btn" onclick="switchTab('2026-07-06')" data-tab="2026-07-06">7/6<span class="count">(7支)</span></button>
+    <button class="tab-btn active" onclick="switchTab('2026-07-15')" data-tab="2026-07-15"><span class="tab-label">7/15</span><span class="count">(3支)</span></button>
+    <button class="tab-btn" onclick="switchTab('2026-07-14')" data-tab="2026-07-14"><span class="tab-label">7/14</span><span class="count">(5支)</span></button>
+    <button class="tab-btn" onclick="switchTab('2026-07-13')" data-tab="2026-07-13"><span class="tab-label">7/13</span><span class="count">(4支)</span></button>
+    <button class="tab-btn" onclick="switchTab('2026-07-10')" data-tab="2026-07-10"><span class="tab-label">7/10</span><span class="count">(11支)</span></button>
+    <button class="tab-btn" onclick="switchTab('2026-07-09')" data-tab="2026-07-09"><span class="tab-label">7/9</span><span class="count">(6支)</span></button>
+    <button class="tab-btn" onclick="switchTab('2026-07-08')" data-tab="2026-07-08"><span class="tab-label">7/8</span><span class="count">(9支)</span></button>
+    <button class="tab-btn" onclick="switchTab('2026-07-07')" data-tab="2026-07-07"><span class="tab-label">7/7</span><span class="count">(11支)</span></button>
+    <button class="tab-btn" onclick="switchTab('2026-07-06')" data-tab="2026-07-06"><span class="tab-label">7/6</span><span class="count">(7支)</span></button>
   </div>
   <button class="tab-next" id="tabNext" type="button" aria-label="向右">›</button>
 </div>
@@ -261,6 +261,39 @@
       if (idx >= 0) { arr.splice(idx, 1); el.className = arr.join(' '); }
     }
 
+    function todayISO() {
+      var d = new Date();
+      var m = d.getMonth() + 1;
+      var day = d.getDate();
+      return d.getFullYear()
+        + '-' + (m < 10 ? '0' : '') + m
+        + '-' + (day < 10 ? '0' : '') + day;
+    }
+
+    function fmtMD(iso) {
+      var p = String(iso || '').split('-');
+      if (p.length < 3) return iso;
+      return parseInt(p[1], 10) + '/' + parseInt(p[2], 10);
+    }
+
+    /** 仅当 data-tab 与当前日历日一致时显示「今日」，否则显示 M/D */
+    function refreshTabLabels() {
+      var today = todayISO();
+      var btns = document.getElementsByClassName('tab-btn');
+      for (var i = 0; i < btns.length; i++) {
+        var key = btns[i].getAttribute('data-tab');
+        var labelEl = btns[i].querySelector('.tab-label');
+        var text = (key === today) ? '今日' : fmtMD(key);
+        if (labelEl) {
+          labelEl.textContent = text;
+        } else {
+          var countEl = btns[i].querySelector('.count');
+          var countHtml = countEl ? countEl.outerHTML : '';
+          btns[i].innerHTML = text + countHtml;
+        }
+      }
+    }
+
     function switchTab(dateKey) {
       var btns = document.getElementsByClassName('tab-btn');
       for (var i = 0; i < btns.length; i++) {
@@ -279,6 +312,8 @@
         }
       }
     }
+
+    refreshTabLabels();
 
     // ========== 整行点击发送到通达信 ==========
     (function() {
